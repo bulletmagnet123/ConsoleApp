@@ -1,9 +1,10 @@
 const rs = require("readline-sync");
-let performOperations;
 
-function getOperation(argument) {
+
+function getOperation() {
     let correctArg = false;
     while (correctArg == false) {
+        const operator = rs.question("enter the argument for the math operation that you want to perform IE +, -, *, /")
         if (
             argument == "+" ||
             argument == "-" ||
@@ -34,7 +35,7 @@ function getOperation(argument) {
     }
 }
 
-function isitanumber() {
+function checkNumber() {
     let number;
 
     while (true) {
@@ -57,75 +58,68 @@ function plus(num1, num2) {
     return answer;
 }
 
-function minus(main, minus) {
-    let num1 = parseFloat(main);
-    let num2 = parseFloat(minus);
+function minus(num1, num2) {
+    let num1 = parseFloat(num1);
+    let num2 = parseFloat(num2);
 
     answer = num1 - num2;
     return answer;
 }
 
-function multiplication(first, second) {
-    let one = parseFloat(first);
-    let two = parseFloat(second);
+function multiplication(num1, num2) {
+    let one = parseFloat(num1);
+    let two = parseFloat(num2);
 
     answer = one * two;
     return answer;
 }
 
-function division(one, two) {
-    let first = parseFloat(one);
-    let second = parseFloat(two);
+function division(num1, num2) {
+    let first = parseFloat(num1);
+    let second = parseFloat(num2);
     answer = first / second;
     return answer;
 }
 
-function performAction(GetOperation) {
-    if (GetOperation == "+") {
+function performAction(operator) {
+    if (operator === "+") {
         console.log("AH addition what would you like to add together?");
-        var one = isitanumber();
-        var two = isitanumber();
+        let one = checkNumber();
+        let two = checkNumber();
         console.log("The answer to your problem is = " + plus(one, two));
-        performOperations == false;
         console.log("Exiting");
         return;
     }
-    if (GetOperation == "-") {
+    if (operator === "-") {
         console.log(
             "AH subtraction what would you like to add subtract from what?"
         );
-        var one = isitanumber();
-        var two = isitanumber();
+        let one = checkNumber();
+        let two = checkNumber();
         console.log("The answer to your problem is = " + minus(one, two));
-        performOperations == false;
         console.log("Exiting");
         return;
     }
-    if (GetOperation == "/") {
+    if (operator === "/") {
         console.log(
             "AH division i was never good at this which is why i had a calculator in school. Anyways!"
         );
-        var one = isitanumber();
-        var two = isitanumber();
+        let one = checkNumber();
+        let two = checkNumber();
         console.log("The answer to your problem is = " + division(one, two));
     }
-    if (GetOperation == "*") {
+    if (operator === "*") {
         console.log("AH multiplication that was a good pick! now please: ");
-        var one = isitanumber();
-        var two = isitanumber();
+        let one = checkNumber();
+        let two = checkNumber();
         console.log(
             "The answer to your problem is = " + multiplication(one, two)
         );
-        performOperations == false;
         console.log("Exiting");
         return;
     }
 }
-var userName = rs.question("what is your name? ");
-var argument = rs.question(
-    "enter the argument for the math operation that you want to perform IE +, -, *, /"
-);
 
-getOperation(argument);
+const operation = getOperation();
 
-performAction(argument);
+performAction(operation);
