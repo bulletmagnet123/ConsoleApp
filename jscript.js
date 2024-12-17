@@ -1,38 +1,17 @@
 const rs = require("readline-sync");
 
-
 function getOperation() {
-    let correctArg = false;
-    while (correctArg == false) {
-        const operator = rs.question("enter the argument for the math operation that you want to perform IE +, -, *, /")
-        if (
-            argument == "+" ||
-            argument == "-" ||
-            argument == "/" ||
-            argument == "*"
-        ) {
+    console.log(
+        "enter the argument for the math operation that you want to perform IE +, -, *, / "
+    );
+    return (operator = rs.promptLoop(function (input) {
+        if (input == "+" || input == "-" || input == "/" || input == "*") {
             console.log("successfully entered operation");
-            correctArg = true;
-            return argument;
+            return input === "+" || "-" || "/" || "*";
         } else {
             console.log("please enter correct js appropriate operator");
-            correctArg = false;
         }
-        var newArgument = rs.question("enter new correct, math argument");
-        if (
-            newArgument == "+" ||
-            newArgument == "-" ||
-            newArgument == "/" ||
-            newArgument == "*"
-        ) {
-            console.log("successfully entered operation");
-            correctArg = true;
-            return newArgument;
-        } else {
-            console.log("please enter correct js appropriate operator");
-            correctArg = false;
-        }
-    }
+    }));
 }
 
 function checkNumber() {
@@ -48,8 +27,6 @@ function checkNumber() {
     }
 }
 
-performOperations = true;
-
 function plus(num1, num2) {
     let num1plus = parseFloat(num1);
     let num2plus = parseFloat(num2);
@@ -59,8 +36,8 @@ function plus(num1, num2) {
 }
 
 function minus(num1, num2) {
-    let num1 = parseFloat(num1);
-    let num2 = parseFloat(num2);
+    num1 = parseFloat(num1);
+    num2 = parseFloat(num2);
 
     answer = num1 - num2;
     return answer;
@@ -107,6 +84,7 @@ function performAction(operator) {
         let one = checkNumber();
         let two = checkNumber();
         console.log("The answer to your problem is = " + division(one, two));
+        return;
     }
     if (operator === "*") {
         console.log("AH multiplication that was a good pick! now please: ");
@@ -120,6 +98,6 @@ function performAction(operator) {
     }
 }
 
-const operation = getOperation();
+let Operation = getOperation();
 
-performAction(operation);
+performAction(Operation);
