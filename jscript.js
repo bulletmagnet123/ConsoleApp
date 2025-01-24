@@ -14,13 +14,15 @@ function getOperation() {
     }));
 }
 
-function checkNumber() {
-    let number;
-
+function checkNumber(number1, number2) {
     while (true) {
-        number = rs.question("Please enter a number: ");
-        if (!isNaN(number) && number !== null && number.trim() !== "") {
-            return parseFloat(number);
+        if (
+            (!isNaN(number1 && number2) &&
+                (number1 || number2) !== null &&
+                number1.trim() !== "") ||
+            number2.trim() !== ""
+        ) {
+            return parseFloat(number1, number2);
         } else {
             console.log("is not a number please enter a number");
         }
@@ -28,10 +30,10 @@ function checkNumber() {
 }
 
 function plus(num1, num2) {
-    let num1plus = parseFloat(num1);
-    let num2plus = parseFloat(num2);
+    num1 = parseFloat(num1);
+    num2 = parseFloat(num2);
 
-    answer = num1plus + num2plus;
+    answer = num1 + num2;
     return answer;
 }
 
@@ -44,60 +46,45 @@ function minus(num1, num2) {
 }
 
 function multiplication(num1, num2) {
-    let one = parseFloat(num1);
-    let two = parseFloat(num2);
+    num1 = parseFloat(num1);
+    num2 = parseFloat(num2);
 
-    answer = one * two;
+    answer = num1 * num2;
     return answer;
 }
 
 function division(num1, num2) {
-    let first = parseFloat(num1);
-    let second = parseFloat(num2);
-    answer = first / second;
+    num1 = parseFloat(num1);
+    num2 = parseFloat(num2);
+    answer = num1 / num2;
     return answer;
 }
 
-function performAction(operator) {
+function performAction(operator, num1, num2) {
     if (operator === "+") {
-        console.log("AH addition what would you like to add together?");
-        let one = checkNumber();
-        let two = checkNumber();
-        console.log("The answer to your problem is = " + plus(one, two));
-        console.log("Exiting");
-        return;
+        console.log(plus(num1, num2));
     }
     if (operator === "-") {
-        console.log(
-            "AH subtraction what would you like to add subtract from what?"
-        );
-        let one = checkNumber();
-        let two = checkNumber();
-        console.log("The answer to your problem is = " + minus(one, two));
-        console.log("Exiting");
-        return;
+        console.log(minus(num1, num2));
     }
     if (operator === "/") {
-        console.log(
-            "AH division i was never good at this which is why i had a calculator in school. Anyways!"
-        );
-        let one = checkNumber();
-        let two = checkNumber();
-        console.log("The answer to your problem is = " + division(one, two));
-        return;
+        console.log(division(num1, num2));
     }
     if (operator === "*") {
-        console.log("AH multiplication that was a good pick! now please: ");
-        let one = checkNumber();
-        let two = checkNumber();
-        console.log(
-            "The answer to your problem is = " + multiplication(one, two)
-        );
-        console.log("Exiting");
-        return;
+        console.log(multiplication(num1, num2));
     }
 }
 
-let Operation = getOperation();
+function main() {
+    let operator = getOperation();
 
-performAction(Operation);
+    checkNumber(num1, num2);
+
+    performAction(
+        operator,
+        rs.question("Please enter number 1: ", (num1 = rs.prompt())),
+        rs.question("Please enter number 2: ", (num2 = rs.prompt()))
+    );
+}
+
+main();
