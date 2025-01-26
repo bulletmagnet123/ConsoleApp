@@ -1,90 +1,97 @@
 const rs = require("readline-sync");
+let num1, num2;
 
 function getOperation() {
     console.log(
-        "enter the argument for the math operation that you want to perform IE +, -, *, / "
+        "Enter the argument for the math operation that you want to perform (e.g., +, -, *, /):"
     );
-    return (operator = rs.promptLoop(function (input) {
-        if (input == "+" || input == "-" || input == "/" || input == "*") {
-            console.log("successfully entered operation");
-            return input === "+" || "-" || "/" || "*";
+    let operator;
+    while (true) {
+        operator = rs.question();
+        if (
+            operator === "+" ||
+            operator === "-" ||
+            operator === "/" ||
+            operator === "*"
+        ) {
+            console.log("Successfully entered operation");
+            return operator;
         } else {
-            console.log("please enter correct js appropriate operator");
+            console.log("Please enter a valid JS operator.");
         }
-    }));
+    }
 }
 
-function checkNumber(number1, number2) {
-    while (true) {
-        if (
-            (!isNaN(number1 && number2) &&
-                (number1 || number2) !== null &&
-                number1.trim() !== "") ||
-            number2.trim() !== ""
-        ) {
-            return parseFloat(number1, number2);
-        } else {
-            console.log("is not a number please enter a number");
-        }
+function checkNumber(num1, num2) {
+    if (!isNaN(num1) && !isNaN(num2)) {
+        return [parseFloat(num1), parseFloat(num2)];
+    } else {
+        console.log(
+            "One of the inputs is not a number. Please enter valid numbers."
+        );
+        return null;
     }
 }
 
 function plus(num1, num2) {
     num1 = parseFloat(num1);
     num2 = parseFloat(num2);
-
-    answer = num1 + num2;
+    let answer = num1 + num2;
     return answer;
 }
 
 function minus(num1, num2) {
     num1 = parseFloat(num1);
     num2 = parseFloat(num2);
-
-    answer = num1 - num2;
+    let answer = num1 - num2;
     return answer;
 }
 
 function multiplication(num1, num2) {
     num1 = parseFloat(num1);
     num2 = parseFloat(num2);
-
-    answer = num1 * num2;
+    let answer = num1 * num2;
     return answer;
 }
 
 function division(num1, num2) {
     num1 = parseFloat(num1);
     num2 = parseFloat(num2);
-    answer = num1 / num2;
+    let answer = num1 / num2;
     return answer;
 }
 
-function performAction(operator, num1, num2) {
+function performOperation(operator, num1, num2) {
+    let numbers = checkNumber(num1, num2);
+    if (!numbers) return;
+
+    num1 = numbers[0];
+    num2 = numbers[1];
+
+    let result;
     if (operator === "+") {
-        console.log(plus(num1, num2));
+        result = plus(num1, num2);
+    } else if (operator === "-") {
+        result = minus(num1, num2);
+    } else if (operator === "/") {
+        result = division(num1, num2);
+    } else if (operator === "*") {
+        result = multiplication(num1, num2);
     }
-    if (operator === "-") {
-        console.log(minus(num1, num2));
-    }
-    if (operator === "/") {
-        console.log(division(num1, num2));
-    }
-    if (operator === "*") {
-        console.log(multiplication(num1, num2));
-    }
+
+    console.log(result);
 }
-
 function main() {
-    let operator = getOperation();
+    const operator = getOperation();
+    console.log("Enter the first number:");
+    let num1 = rs.question();
+    console.log("Enter the second number:");
+    let num2 = rs.question();
 
-    checkNumber(num1, num2);
-
-    performAction(
-        operator,
-        rs.question("Please enter number 1: ", (num1 = rs.prompt())),
-        rs.question("Please enter number 2: ", (num2 = rs.prompt()))
-    );
+    const numbers = checkNumber(num1, num2);
+    if (numbers) {
+        const result = performOperation(operator, numbers[0], numbers[1]);
+    }
 }
 
 main();
