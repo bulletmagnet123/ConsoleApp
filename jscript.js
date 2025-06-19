@@ -24,7 +24,6 @@ const getOperator = () => {
     }
 };
 
-// Math operation functions
 const operations = {
     "+": (a, b) => a + b,
     "-": (a, b) => a - b,
